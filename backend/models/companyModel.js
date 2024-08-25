@@ -5,6 +5,7 @@ const companySchema = new mongoose.Schema(
     name: {
       type: String,
       required: true,
+      unique: true,
     },
 
     description: {
@@ -13,7 +14,6 @@ const companySchema = new mongoose.Schema(
 
     website: {
       type: String,
-      required: true,
     },
 
     location: {
@@ -28,7 +28,8 @@ const companySchema = new mongoose.Schema(
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: ture,
+      required: true,
+      select: false,
     },
   },
   { timestamps: true }

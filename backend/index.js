@@ -3,7 +3,9 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import userRoute from "./routers/userRoutes.js";
-
+import companyRoute from "./routers/companyRoutes.js";
+import jobRoute from "./routers/jobRoutes.js";
+import applicationRoute from "./routers/applicationRoutes.js";
 dotenv.config({});
 
 const app = express();
@@ -21,10 +23,20 @@ const corsOption = {
 };
 app.use(cors(corsOption));
 
+//API's routes
 app.use("/api/v1/user", userRoute);
+app.use("/api/vi/company", companyRoute);
+app.use("/api/v1/job", jobRoute);
+app.use("/api/v1/application", applicationRoute);
+
+// app.use("/*", async (req, res) => {
+//   res.status(404).json({
+//     message: "route not defined",
+//     success: false,
+//   });
+// });
 
 app.listen(PORT, () => {
   connectDB();
-
   console.log(`Server listening on Port ${PORT}`);
 });

@@ -1,6 +1,9 @@
 import jwt from "jsonwebtoken";
+import { User } from "../models/userModel.js";
 
 const SECRET_KEY = process.env.SECRET_KEY || "yourSecretKey";
+
+//user logged in or not
 const isAuthenticated = async (req, res, next) => {
   try {
     const token = req.cookies.token;
@@ -19,6 +22,8 @@ const isAuthenticated = async (req, res, next) => {
     }
 
     req.id = decode.userId;
+    req.user = await User.findById(req.id);
+
     next();
   } catch (err) {
     console.log(err);
