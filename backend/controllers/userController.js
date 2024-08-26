@@ -1,13 +1,15 @@
 import { User } from "../models/userModel.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-
 const SECRET_KEY = process.env.SECRET_KEY || "yourSecretKey";
 
 export const register = async (req, res) => {
   //check any filled is empty
   try {
     const { fullname, email, phoneNumber, password, role } = req.body;
+    const file = req.file;
+
+    console.log(req.body);
     if (!fullname || !email || !phoneNumber || !password || !role) {
       return res.status(400).json({
         message: "No field can be empty!",
@@ -18,8 +20,7 @@ export const register = async (req, res) => {
     // check if user exist with the the email.
     let user = await User.find({ email: email });
 
-    console.log(user);
-    if (user == null)
+    if (user)
       return res.status(400).json({
         message: "User already exist with this email!",
         success: false,
@@ -37,8 +38,10 @@ export const register = async (req, res) => {
         password: hashedPassword,
         role,
       });
+
       console.log("User registered successfully");
       res.status(201).json({
+        message: "registered successfully",
         user: user,
         success: true,
       });

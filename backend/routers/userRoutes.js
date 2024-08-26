@@ -7,11 +7,13 @@ import {
   logout,
 } from "../controllers/userController.js";
 
+import { upload } from "../middlewares/multer.js";
+
 import isAuthenticated from "../middlewares/isAuthenticate.js";
 
 const router = express.Router();
 
-router.route("/register").post(register);
+router.route("/register").post(upload.single("file"), register);
 
 router.route("/login").post(login);
 
