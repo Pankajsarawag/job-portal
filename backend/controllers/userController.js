@@ -31,7 +31,7 @@ export const register = async (req, res) => {
 
     //create user - register user
     try {
-      user = await User.create({
+      newUser = await User.create({
         fullname,
         email,
         phoneNumber,
@@ -39,10 +39,12 @@ export const register = async (req, res) => {
         role,
       });
 
+      newUser.password = undefined;
+
       console.log("User registered successfully");
       res.status(201).json({
         message: "registered successfully",
-        user: user,
+        user: newUser,
         success: true,
       });
     } catch (err) {
@@ -98,6 +100,7 @@ export const login = async (req, res) => {
     //generate token
     const token = generateToken(user._id);
 
+    user.password = undefined;
     //send response to server
     res
       .status(200)
