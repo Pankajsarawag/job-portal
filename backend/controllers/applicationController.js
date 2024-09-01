@@ -38,14 +38,17 @@ export const applyJob = async (req, res) => {
       applicant: userId,
     });
 
+    if (newApplication) console.log(newApplication);
+
     //add in job applicants
     job.applications.push(newApplication._id);
     await job.save();
 
     //response
-    res.status(201).json({
+    res.status(200).json({
       message: "applied successfully",
       success: true,
+      job,
     });
   } catch (error) {
     console.log(error);

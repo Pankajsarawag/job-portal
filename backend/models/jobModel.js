@@ -1,4 +1,3 @@
-import { application } from "express";
 import mongoose from "mongoose";
 
 const jobSchema = new mongoose.Schema(
@@ -51,7 +50,7 @@ const jobSchema = new mongoose.Schema(
     applications: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Applications",
+        ref: "Application",
       },
     ],
   },

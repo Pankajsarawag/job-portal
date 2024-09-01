@@ -7,17 +7,18 @@ const SECRET_KEY = process.env.SECRET_KEY || "yourSecretKey";
 const isAuthenticated = async (req, res, next) => {
   try {
     const token = req.cookies.token;
+    // console.log(token);
     if (!token)
       return res.status(401).json({
         message: "user not authenticated",
-        success: true,
+        success: false,
       });
 
     const decode = await jwt.verify(token, SECRET_KEY);
     if (!decode) {
       return res.status(401).json({
         message: "invalid token",
-        success: true,
+        success: false,
       });
     }
 

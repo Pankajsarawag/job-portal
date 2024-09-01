@@ -17,7 +17,9 @@ router.route("/register").post(upload.single("file"), register);
 
 router.route("/login").post(login);
 
-router.route("/profile/update").patch(isAuthenticated, updateProfile);
+router
+  .route("/profile/update")
+  .put(isAuthenticated, upload.single("file"), updateProfile);
 
 router.route("/logout").get(isAuthenticated, logout);
 

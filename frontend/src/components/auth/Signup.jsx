@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import Navbar from "../shared/Navbar";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -8,8 +9,7 @@ import { useState } from "react";
 import axios from "axios";
 import { USER_API_END_POINT } from "@/utils/constants";
 import { toast } from "sonner";
-import { useDispatch, useSelector } from "react-redux";
-import { setLoading } from "@/redux/authSlice";
+import { useDispatch } from "react-redux";
 import { Loader2 } from "lucide-react";
 
 const Signup = () => {
@@ -23,8 +23,7 @@ const Signup = () => {
   });
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const loading = useSelector((store) => store.auth);
+  const [loading, setLoading] = useState(false);
 
   //handle input fields
   const handleChange = (e) => {
@@ -44,7 +43,8 @@ const Signup = () => {
   //handle forma submitted
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(setLoading(true));
+    // dispatch(setLoading(true))
+    setLoading(true);
     // console.log(formData);
 
     try {
@@ -63,7 +63,7 @@ const Signup = () => {
       // console.log(error);
       toast.error(error.response.data.message);
     } finally {
-      dispatch(setLoading(false));
+      setLoading(false);
     }
   };
 

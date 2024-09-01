@@ -1,18 +1,32 @@
-import { Bookmark } from "lucide-react";
-import { Badge } from "./ui/badge";
-import { Button } from "./ui/button";
+/* eslint-disable react/prop-types */
+import { Badge } from "../ui/badge";
+import { Button } from "../ui/button";
 import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
 import { useNavigate } from "react-router-dom";
-
-const JobMainCard = () => {
+import JobDetail from "./JobDetail";
+import { Bookmark } from "lucide-react";
+const JobMainCard = ({ job }) => {
   const navigate = useNavigate();
-  const jobId = 1;
+
+  //funtion to calculate no of days ago the job
+  const calculateDays = (createdTime) => {
+    const created = new Date(createdTime);
+    const currentTime = new Date();
+    const timeDiff = currentTime - created;
+
+    return Math.floor(timeDiff / (1000 * 24 * 60 * 60));
+  };
 
   return (
     <div className="rounded-md border border-gray-100 shadow-xl px-2 bg-white">
       <div className="flex items-center justify-between pt-2">
-        <p className="text-gray-500 text-sm">2 days ago</p>
-        <Button variant="outline" classname="rounded-full" size="icon">
+        <p className="text-gray-500 text-sm">
+          {calculateDays(JobDetail.createdAt) == 0
+            ? "Today"
+            : `${calculateDays(job.createdAt)}`}{" "}
+          days ago
+        </p>
+        <Button variant="outline" className="rounded-full" size="icon">
           <Bookmark />
         </Button>
       </div>
@@ -28,12 +42,8 @@ const JobMainCard = () => {
         </div>
       </div>
       <div>
-        <h1 className="font-bold text-lg mt-2">FullStack Developer</h1>
-        <p className="text-gray-600">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, nobis.
-          Voluptatum, fuga amet minus consequuntur in architecto neque! Ipsa,
-          dolores?
-        </p>
+        <h1 className="font-bold text-lg mt-2">{job.title}</h1>
+        <p className="text-gray-600">{job.description}</p>
       </div>
       <div className="py-2 flex gap-4 items-center justify-start">
         <Badge
@@ -41,7 +51,7 @@ const JobMainCard = () => {
           className="h-8 text-[#6f5c92] cursor-pointer 
             hover:text-[#452a74] font-bold"
         >
-          2 Positions
+          {job.position} Positions
         </Badge>
         <Badge
           variant="ghost"
@@ -59,7 +69,7 @@ const JobMainCard = () => {
       <div className="flex items-center gap-4 mt-4 pb-2">
         <Button
           variant="outline"
-          onClick={() => navigate(`/job/detail/${jobId}`)}
+          onClick={() => navigate(`/job/detail/${job._id}`)}
         >
           Details
         </Button>

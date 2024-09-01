@@ -36,7 +36,7 @@ const Login = () => {
   //handle the logged in details
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log(formData);
+    console.log(formData);
 
     try {
       //post request

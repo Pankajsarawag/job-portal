@@ -1,4 +1,4 @@
-import JobMainCard from "./JobMainCard";
+import JobMainCard from "./jobPages/JobMainCard";
 import Navbar from "./shared/Navbar";
 
 const Browse = () => {

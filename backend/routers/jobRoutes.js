@@ -12,7 +12,7 @@ const router = express.Router();
 
 router
   .route("/")
-  .get(isAuthenticated, getAllJobs)
+  .get(getAllJobs)
   .post(isAuthenticated, checkRole("recruiter"), postJob);
 
 router.route("/posts").get(isAuthenticated, checkRole("recruiter"), getRecJobs);

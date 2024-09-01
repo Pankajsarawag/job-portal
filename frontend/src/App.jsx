@@ -2,12 +2,13 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
 import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
-import Home from "./components/Home";
-import Jobs from "./components/Jobs";
+import Home from "./components/home/Home";
+import Jobs from "./components/jobPages/Jobs";
 import Browse from "./components/Browse";
-import Profile from "./components/Profile";
-import JobDetail from "./components/JobDetail";
-
+import Profile from "./components/userProfile/profile";
+import JobDetail from "./components/jobPages/JobDetail";
+import Companies from "./components/admin/Companies";
+import CreateCompany from "./components/admin/CreateCompany";
 function App() {
   const appRouter = createBrowserRouter([
     {
@@ -22,6 +23,7 @@ function App() {
       path: "login",
       element: <Login />,
     },
+
     {
       path: "/jobs",
       element: <Jobs />,
@@ -37,6 +39,17 @@ function App() {
     {
       path: "/job/detail/:id",
       element: <JobDetail />,
+    },
+
+    // recruiter routes
+    {
+      path: "/admin/companies",
+      element: <Companies />,
+    },
+
+    {
+      path: "/admin/companies/create",
+      element: <CreateCompany />,
     },
   ]);
   return (
