@@ -3,7 +3,7 @@ import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
 import { useNavigate } from "react-router-dom";
-import JobDetail from "./JobDetail";
+
 import { Bookmark } from "lucide-react";
 const JobMainCard = ({ job }) => {
   const navigate = useNavigate();
@@ -21,10 +21,9 @@ const JobMainCard = ({ job }) => {
     <div className="rounded-md border border-gray-100 shadow-xl px-2 bg-white">
       <div className="flex items-center justify-between pt-2">
         <p className="text-gray-500 text-sm">
-          {calculateDays(JobDetail.createdAt) == 0
+          {calculateDays(job.createdAt) === 0
             ? "Today"
-            : `${calculateDays(job.createdAt)}`}{" "}
-          days ago
+            : `${calculateDays(job.createdAt)} days ago`}
         </p>
         <Button variant="outline" className="rounded-full" size="icon">
           <Bookmark />
@@ -33,11 +32,11 @@ const JobMainCard = ({ job }) => {
       <div className="flex items-center gap-2 my-2">
         <Button variant="outline" size="icon">
           <Avatar>
-            <AvatarImage src="https://cdn2.hubspot.net/hubfs/53/image8-2.jpg" />
+            <AvatarImage src={job?.companyId.logo} />
           </Avatar>
         </Button>
         <div>
-          <h1 className="font-bold">Google</h1>
+          <h1 className="font-bold">{job?.companyId.name}</h1>
           <p className="text-muted-foreground">India</p>
         </div>
       </div>

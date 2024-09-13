@@ -7,42 +7,12 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/table";
+import { useSelector } from "react-redux";
 
 import { Badge } from "../ui/badge";
 
 const AppliedJobTable = () => {
-  const appliedJobs = [
-    {
-      Date: "34:34:23",
-      JobRole: "backendDeveloper",
-      Company: "jobHunt",
-      Status: "Pending",
-    },
-    {
-      Date: "34:34:23",
-      JobRole: "backendDeveloper",
-      Company: "jobHunt",
-      Status: "Pending",
-    },
-    {
-      Date: "34:34:23",
-      JobRole: "backendDeveloper",
-      Company: "jobHunt",
-      Status: "Pending",
-    },
-    {
-      Date: "34:34:23",
-      JobRole: "backendDeveloper",
-      Company: "jobHunt",
-      Status: "Pending",
-    },
-    {
-      Date: "34:34:23",
-      JobRole: "backendDeveloper",
-      Company: "jobHunt",
-      Status: "Pending",
-    },
-  ];
+  const { appliedJobs } = useSelector((store) => store.job);
 
   return (
     <div className="border border-gray-100 rounded-full bg-white">
@@ -58,16 +28,25 @@ const AppliedJobTable = () => {
             <TableHead className="text-right">Status</TableHead>
           </TableRow>
         </TableHeader>
-
         <TableBody>
-          {appliedJobs.map((job, ind) => (
+          {appliedJobs?.map((application) => (
             <>
-              <TableRow key={ind}>
-                <TableCell>{job.Date}</TableCell>
-                <TableCell>{job.JobRole}</TableCell>
-                <TableCell>{job.Company}</TableCell>
+              <TableRow key={application?._id}>
+                <TableCell>{application?.createdAt.split("T")[0]}</TableCell>
+                <TableCell>{application?.job?.title}</TableCell>
+                <TableCell>{application?.job?.companyId?.name}</TableCell>
                 <TableCell className="text-right">
-                  <Badge>{job.Status}</Badge>
+                  <Badge
+                    className={`${
+                      application?.status.toLowerCase() === "rejected"
+                        ? "bg-red-400"
+                        : application?.status.toLowerCase() === "pending"
+                        ? "bg-gray-400"
+                        : "bg-green-400"
+                    }`}
+                  >
+                    {application?.status.toUpperCase()}
+                  </Badge>
                 </TableCell>
               </TableRow>
             </>

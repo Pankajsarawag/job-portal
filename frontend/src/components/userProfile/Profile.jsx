@@ -8,8 +8,10 @@ import AppliedJobTable from "./AppliedJobTable";
 import { useState } from "react";
 import UpdateProfile from "./UpdateProfile";
 import { useSelector } from "react-redux";
+import GetAllAppliedJob from "@/hooks/getAllAppliedJob";
 
 const Profile = () => {
+  GetAllAppliedJob();
   const { user } = useSelector((store) => store.auth);
 
   const [open, setOpen] = useState(false);

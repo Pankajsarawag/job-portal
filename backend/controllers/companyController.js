@@ -1,4 +1,6 @@
 import { Company } from "../models/companyModel.js";
+import cloudinary from "../utils/cloudinary.js";
+import getDataUri from "../utils/datauri.js";
 
 // register company
 export const registerCompany = async (req, res) => {
@@ -7,7 +9,7 @@ export const registerCompany = async (req, res) => {
     const { companyName, logo } = req.body;
 
     //check if both the fields are non-empty
-    if (!companyName || !logo)
+    if (!companyName)
       return res.status(400).json({
         Message: "Please add the required fields.",
         success: false,
@@ -25,7 +27,7 @@ export const registerCompany = async (req, res) => {
     //create and register company
     company = await Company.create({
       name: companyName,
-      logo: logo,
+      // logo: logo,
       userId: req.id,
     });
 
@@ -42,7 +44,7 @@ export const registerCompany = async (req, res) => {
   }
 };
 
-//get company info
+//get companies registered a recruiter
 export const getCompany = async (req, res) => {
   try {
     const userId = req.id; //logged in user
@@ -67,7 +69,6 @@ export const getCompany = async (req, res) => {
 //get company by id
 export const getCompanybyId = async (req, res) => {
   try {
-    const companyId = req.params.id;
     const company = await Company.findById(req.params.id);
 
     if (!company) {
@@ -77,6 +78,7 @@ export const getCompanybyId = async (req, res) => {
       });
     }
 
+    console.log(company);
     res.status(200).json({
       company,
       message: "successfully fetched.",
@@ -95,8 +97,17 @@ export const updateCompany = async (req, res) => {
     const file = req.file;
 
     //cloudinary
+    const fileURI = getDataUri(file);
 
-    const updateData = { name, description, website, location };
+    const cloudResponse = await cloudinary.uploader.upload(fileURI.content);
+    const logo = cloudResponse.secure_url;
+    const updateData = {
+      name,
+      description,
+      website,
+      location,
+      logo,
+    };
     const company = await Company.findByIdAndUpdate(companyId, updateData, {
       new: true,
     });

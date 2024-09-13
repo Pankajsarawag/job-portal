@@ -129,7 +129,9 @@ const JobDetail = () => {
         <div className="my-4">
           <h1 className="font-bold">
             Role&nbsp;:&nbsp;
-            <span className="font-normal text-gray-800">{jobDetail?.role}</span>
+            <span className="font-normal text-gray-800">
+              {jobDetail?.title}
+            </span>
           </h1>
           <h1 className="font-bold">
             Location&nbsp;:&nbsp;

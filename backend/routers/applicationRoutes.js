@@ -13,8 +13,10 @@ const router = express.Router();
 router.route("/applied").get(isAuthenticated, checkRole("user"), getAppliedJob);
 router.route("/apply/:id").post(isAuthenticated, checkRole("user"), applyJob);
 router
-  .route("/applicants/:id")
+  .route("/applicants/:id") //applicants for a job
   .get(isAuthenticated, checkRole("recruiter"), getJobApplicants);
-router.route("/:id").patch(isAuthenticated, checkRole("user"), updateStatus);
+router
+  .route("/:id")
+  .patch(isAuthenticated, checkRole("recruiter"), updateStatus);
 
 export default router;

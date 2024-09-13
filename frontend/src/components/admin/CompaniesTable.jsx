@@ -14,10 +14,28 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@radix-ui/react-popover";
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const CompaniesTable = () => {
+  const { companies, searchCompany } = useSelector((store) => store.company);
   const navigate = useNavigate();
+  const [filterCompany, setFilterCompany] = useState(companies);
+  useEffect(() => {
+    const filteredCompany =
+      companies.length >= 0 &&
+      companies.filter((company) => {
+        if (!searchCompany) return true;
+
+        return company?.name
+          ?.toLowerCase()
+          .includes(searchCompany.toLowerCase());
+      });
+
+    setFilterCompany(filteredCompany);
+  }, [companies, searchCompany]);
+
   return (
     <div>
       <Table>
@@ -31,28 +49,41 @@ const CompaniesTable = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          <TableCell>
-            <Avatar>
-              <AvatarImage src=""></AvatarImage>
-            </Avatar>
-          </TableCell>
-          <TableCell onClick={() => navigate("/admin/companies/create")}>
-            Company Name
-          </TableCell>
-          <TableCell>01-09-2024</TableCell>
-          <TableCell className="text-right cursor-pointer">
-            <Popover>
-              <PopoverTrigger>
-                <MoreHorizontal />
-              </PopoverTrigger>
-              <PopoverContent className="w-30">
-                <div className="flex items-center gap-2 w-fit cursor-pointer">
-                  <Edit2 className="w-4" />
-                  <span>Edit</span>
-                </div>
-              </PopoverContent>
-            </Popover>
-          </TableCell>
+          {filterCompany &&
+            filterCompany.map((company) => {
+              return (
+                <TableRow key={company._id}>
+                  <TableCell>
+                    <Avatar>
+                      <AvatarImage
+                        src={company.logo}
+                        className="w-8 h-8"
+                      ></AvatarImage>
+                    </Avatar>
+                  </TableCell>
+                  <TableCell>{company?.name}</TableCell>
+                  <TableCell>{company.createdAt.split("T")[0]}</TableCell>
+                  <TableCell className="text-right cursor-pointer">
+                    <Popover>
+                      <PopoverTrigger>
+                        <MoreHorizontal />
+                      </PopoverTrigger>
+                      <PopoverContent className="w-30">
+                        <div
+                          className="flex items-center gap-2 w-fit cursor-pointer"
+                          onClick={() =>
+                            navigate(`/admin/companies/${company._id}`)
+                          }
+                        >
+                          <Edit2 className="w-4" />
+                          <span>Edit</span>
+                        </div>
+                      </PopoverContent>
+                    </Popover>
+                  </TableCell>
+                </TableRow>
+              );
+            })}
         </TableBody>
       </Table>
     </div>

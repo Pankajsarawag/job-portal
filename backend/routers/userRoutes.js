@@ -21,6 +21,6 @@ router
   .route("/profile/update")
   .put(isAuthenticated, upload.single("file"), updateProfile);
 
-router.route("/logout").get(isAuthenticated, logout);
+router.route("/logout").get(logout);
 
 export default router;

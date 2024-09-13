@@ -22,7 +22,7 @@ const companySchema = new mongoose.Schema(
 
     logo: {
       type: String, //url to company logo
-      required: true,
+      // required: true,
     },
 
     userId: {

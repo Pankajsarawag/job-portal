@@ -55,7 +55,7 @@ export const applyJob = async (req, res) => {
   }
 };
 
-//get applied jobs by user
+//get all the jobs applied by the user
 export const getAppliedJob = async (req, res) => {
   try {
     //get the applications if exist (nest populate is used)
@@ -90,12 +90,17 @@ export const getJobApplicants = async (req, res) => {
   try {
     const jobId = req.params.id;
 
-    //find jobApplicant
-    const jobApplicants = await Application.find({ job: jobId }).populate({
-      path: "applicant",
-      options: { sort: { createdAt: -1 } },
-    });
+    // console.log(jobId);
 
+    //find jobApplicant
+    const jobApplicants = await Application.find({ job: jobId })
+      .populate({ path: "job" })
+      .populate({
+        path: "applicant",
+        options: { sort: { createdAt: -1 } },
+      });
+
+    // console.log(jobApplicants);
     if (!jobApplicants)
       res.status(404).json({
         message: "No applicant found",

@@ -1,10 +1,15 @@
 /* eslint-disable react/prop-types */
 import { Badge } from "@/components/ui/badge";
+import { useNavigate } from "react-router-dom";
 
 const JobCard = ({ job }) => {
+  const navigate = useNavigate();
   // console.log(job.companyId.name);
   return (
-    <div className="rounded-md bg-white border border-gray-100 shadow-xl p-3 ">
+    <div
+      onClick={() => navigate(`/job/detail/${job._id}`)}
+      className="rounded-md bg-white border border-gray-100 shadow-xl p-3 "
+    >
       <h3 className="font-semibold txt-lg"></h3>
       <p className="text-muted-foreground">India</p>
       <h2 className="text-lg font-bold mt-2">{job.title}</h2>

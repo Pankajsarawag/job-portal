@@ -57,10 +57,11 @@ export const postJob = async (req, res) => {
   }
 };
 
-//user
+//jobs for the users
 export const getAllJobs = async (req, res) => {
   try {
     const keyword = req.query.keyword || "";
+    console.log(req.query.keyword);
 
     //query to filter jobs
     const query = {
@@ -107,12 +108,14 @@ export const getJobById = async (req, res) => {
   }
 };
 
-//jobs posted by recruiter
+//get jobs posted by recruiter
 export const getRecJobs = async (req, res) => {
   try {
     const userId = req.id;
 
-    const jobs = await Job.find({ created_by: userId });
+    const jobs = await Job.find({ created_by: userId }).populate({
+      path: "companyId",
+    });
     if (!jobs)
       return res.status(404).json({
         message: "No job found!",

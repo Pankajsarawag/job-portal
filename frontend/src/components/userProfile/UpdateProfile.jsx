@@ -46,9 +46,9 @@ const UpdateProfile = ({ open, setOpen }) => {
     if (files.length > 0) {
       const file = files[0]; // Access the first file
       if (file.type === "application/pdf") {
-        console.log("PDF uploaded:", file.name); // Logs 'Resume.pdf'
-        console.log("File size:", file.size); // Logs file size in bytes
-        console.log("Last modified date:", file.lastModifiedDate); // Logs the last modified date
+        // console.log("PDF uploaded:", file.name); // Logs 'Resume.pdf'
+        // console.log("File size:", file.size); // Logs file size in bytes
+        // console.log("Last modified date:", file.lastModifiedDate); // Logs the last modified date
 
         setInputs({
           ...inputs,
@@ -64,7 +64,7 @@ const UpdateProfile = ({ open, setOpen }) => {
 
   // handle when form is submitted
   const handleSubmit = async (e) => {
-    const formData = new FormData();
+    // const formData = new FormData();
 
     e.preventDefault();
     console.log(inputs);
