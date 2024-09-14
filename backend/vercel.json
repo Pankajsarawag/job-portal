@@ -1,9 +1,16 @@
 {
     "version": 2,
     "functions": {
-      "api/**/*.js": {
+      "backend/**/*.js": {
         "maxDuration": 60 
       }
     }
+,
+    "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/api/index.js"
+    }
+  ]
   }
   

@@ -2,10 +2,10 @@ import cookieParser from "cookie-parser";
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import userRoute from "./routers/userRoutes.js";
-import companyRoute from "./routers/companyRoutes.js";
-import jobRoute from "./routers/jobRoutes.js";
-import applicationRoute from "./routers/applicationRoutes.js";
+import userRoute from "../routers/userRoutes.js";
+import companyRoute from "../routers/companyRoutes.js";
+import jobRoute from "../routers/jobRoutes.js";
+import applicationRoute from "../routers/applicationRoutes.js";
 dotenv.config({});
 
 const app = express();
