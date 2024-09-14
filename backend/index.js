@@ -24,6 +24,10 @@ const corsOption = {
 app.use(cors(corsOption));
 
 //API's routes
+app.get("/", (req, res) => {
+  res.send("Welcome to JobForge backend!");
+});
+
 app.use("/api/v1/user", userRoute);
 app.use("/api/vi/company", companyRoute);
 app.use("/api/v1/job", jobRoute);
