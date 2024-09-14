@@ -17,7 +17,7 @@ export const register = async (req, res) => {
     const cloudResponse = await cloudinary.uploader.upload(fileURI.content);
     console.log(cloudResponse);
 
-    console.log(req.body);
+    // console.log(req.body);
     if (!fullname || !email || !phoneNumber || !password || !role) {
       return res.status(400).json({
         message: "No field can be empty!",
@@ -40,7 +40,6 @@ export const register = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     //create user - register user
-
     let newUser = await User.create({
       fullname,
       email,
@@ -75,7 +74,7 @@ export const login = async (req, res) => {
   try {
     const { email, password, role } = req.body;
 
-    //if all the fileds are filled
+    //check fields
     if (!email || !password || !role) {
       return res.status(400).json({
         message: "all the fields are required",
@@ -83,7 +82,7 @@ export const login = async (req, res) => {
       });
     }
 
-    //fetch user from database if exist
+    //fetch user from database
     const user = await User.findOne({ email: email }).select("+password");
 
     if (!user)
@@ -92,14 +91,14 @@ export const login = async (req, res) => {
         status: false,
       });
 
-    //match the hashed password and curr password
+    //match password
     const isPasswordMatch = await bcrypt.compare(password, user.password);
     if (!isPasswordMatch)
       return res.status(404).json({
         message: "incorrect password or role",
       });
 
-    //if the role mentioned is correct or not
+    //check role
     if (user.role != role)
       return res.status(404).json({
         message: "incorrect credentials!",
@@ -110,6 +109,7 @@ export const login = async (req, res) => {
     const token = generateToken(user._id);
 
     user.password = undefined;
+
     //send response to server
     res
       .status(200)
@@ -125,6 +125,10 @@ export const login = async (req, res) => {
       });
   } catch (err) {
     console.log(err);
+    res.status(500).json({
+      message: "Internal server error",
+      success: false,
+    });
   }
 };
 
