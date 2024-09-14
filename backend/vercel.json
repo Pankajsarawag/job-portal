@@ -4,18 +4,6 @@
       "backend/index.js": {
         "maxDuration": 60 
       }
-    },
-    "builds": [
-      {
-        "src": "backend/index.js",
-        "use": "@vercel/node"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "/backend/index.js"
-      }
-    ]
+    }
   }
   
