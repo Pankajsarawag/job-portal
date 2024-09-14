@@ -4,7 +4,7 @@ const FilterCard = () => {
   const filterData = [
     {
       filterType: "Location",
-      list: ["Delhi NCR", "Banglore", "Hyderabad", "pune", "Mumbai"],
+      list: ["Delhi NCR", "Banglore", "Hyderabad", "pune", "Mumbai", "Remote"],
     },
 
     {
@@ -23,7 +23,7 @@ const FilterCard = () => {
     },
     {
       filterType: "Job Type",
-      list: ["Remote", "OnSite", "Remote"],
+      list: ["Full-time", "Part-time", "Internship"],
     },
   ];
   return (
