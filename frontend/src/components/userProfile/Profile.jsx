@@ -8,7 +8,7 @@ import AppliedJobTable from "./AppliedJobTable";
 import { useState } from "react";
 import UpdateProfile from "./UpdateProfile";
 import { useSelector } from "react-redux";
-import GetAllAppliedJob from "@/hooks/getAllAppliedJob";
+import GetAllAppliedJob from "@/hooks/GetAllAppliedJob";
 import Footer from "../footer/Footer";
 
 const Profile = () => {
