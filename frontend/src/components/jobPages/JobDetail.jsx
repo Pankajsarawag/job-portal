@@ -14,6 +14,7 @@ import {
 } from "@/utils/constants";
 import { setjobDetail } from "@/redux/jobSlice";
 import { toast } from "sonner";
+import Footer from "../footer/Footer";
 
 const JobDetail = () => {
   const params = useParams();
@@ -169,6 +170,7 @@ const JobDetail = () => {
           </h1>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

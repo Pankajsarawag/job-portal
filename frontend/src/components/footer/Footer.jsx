@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <footer className="bg-gray-100 text-gray-800 py-6 shadow-t-lg">
+    <footer className="bg-gray-100 text-gray-800 py-6 shadow-t-lg fixed bottom-0 left-0 w-full">
       <div className="sm:container mx-auto text-center md:flex items-center justify-around">
         <p>
           &copy; 2024 JobForge. <br /> All Rights Reserved.

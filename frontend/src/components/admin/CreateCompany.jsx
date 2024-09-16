@@ -9,6 +9,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { useDispatch } from "react-redux";
 import { setSingleCompany } from "@/redux/companySlice";
+import Footer from "../footer/Footer";
 
 const CreateCompany = () => {
   const navigate = useNavigate();
@@ -78,6 +79,7 @@ const CreateCompany = () => {
           <Button onClick={registerCompany}>Continue</Button>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types */
 import { Badge } from "@/components/ui/badge";
 import { useNavigate } from "react-router-dom";
+import { Button } from "../ui/button";
+import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
 
 const JobCard = ({ job }) => {
   const navigate = useNavigate();
@@ -10,8 +12,18 @@ const JobCard = ({ job }) => {
       onClick={() => navigate(`/job/detail/${job._id}`)}
       className="rounded-md bg-white border border-gray-100 shadow-xl p-3 "
     >
-      <h3 className="font-semibold txt-lg"></h3>
-      <p className="text-muted-foreground">India</p>
+      <div className="flex items-center gap-2 my-2">
+        <Button variant="outline" size="icon">
+          <Avatar>
+            <AvatarImage src={job?.companyId.logo} />
+          </Avatar>
+        </Button>
+        <div>
+          <h1 className="font-bold">{job?.companyId.name}</h1>
+          <p className="text-muted-foreground">India</p>
+        </div>
+      </div>
+
       <h2 className="text-lg font-bold mt-2">{job.title}</h2>
       <p className="text-sm text-muted-foreground">{job.description}</p>
       <div className="pt-2 flex gap-4 items-center justify-start">

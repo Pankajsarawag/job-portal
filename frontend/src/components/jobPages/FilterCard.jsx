@@ -1,5 +1,8 @@
 import { RadioGroup } from "@radix-ui/react-radio-group";
 import { Label } from "@radix-ui/react-label";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { setSearchQuery } from "@/redux/jobSlice";
 const FilterCard = () => {
   const filterData = [
     {
@@ -26,6 +29,20 @@ const FilterCard = () => {
       list: ["Full-time", "Part-time", "Internship"],
     },
   ];
+
+  const [selectedValue, setSelectedValue] = useState("");
+
+  const dispatch = useDispatch();
+
+  const changeHandler = (e) => {
+    setSelectedValue(e.target.value);
+  };
+
+  useEffect(() => {
+    console.log(selectedValue);
+    dispatch(setSearchQuery(selectedValue));
+  }, [selectedValue]);
+
   return (
     <div className="pl-5 bg-white  rounded-md">
       <h1 className="flex justify-start items-center font-bold text-lg">
@@ -45,6 +62,7 @@ const FilterCard = () => {
                     name={data.filterType}
                     value={filter}
                     id="dk"
+                    onChange={changeHandler}
                   />
                   {/* <RadioGroupItem value={filter} /> */}
                   <Label

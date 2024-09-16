@@ -6,6 +6,7 @@ import { APPLICATION_API_END_POINT } from "@/utils/constants";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setApplicants } from "@/redux/applicationSlice";
+import Footer from "../footer/Footer";
 
 const Applicants = () => {
   const params = useParams();
@@ -43,6 +44,7 @@ const Applicants = () => {
         </h1>
         <ApplicantsTable />
       </div>
+      <Footer />
     </div>
   );
 };

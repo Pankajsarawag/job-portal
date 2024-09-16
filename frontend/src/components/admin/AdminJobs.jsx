@@ -8,6 +8,7 @@ import { Button } from "../ui/button";
 import AdminJobsTable from "./AdminJobsTable";
 import { setSearchJobs } from "@/redux/jobSlice";
 import GetAllAdminJobs from "@/hooks/GetAllAdminJobs";
+import Footer from "../footer/Footer";
 
 const AdminJobs = () => {
   GetAllAdminJobs();
@@ -41,6 +42,7 @@ const AdminJobs = () => {
         </div>
         <AdminJobsTable />
       </div>
+      <Footer />
     </div>
   );
 };

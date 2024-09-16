@@ -4,6 +4,7 @@ import Navbar from "./shared/Navbar";
 import { useEffect } from "react";
 import { setSearchQuery } from "@/redux/jobSlice";
 import UseGetAlljobs from "@/hooks/UseGetAlljobs";
+import Footer from "./footer/Footer";
 
 const Browse = () => {
   UseGetAlljobs();
@@ -18,7 +19,7 @@ const Browse = () => {
   return (
     <div>
       <Navbar />
-      <div className="max-w-7xl mx-auto my-10 mt-5 px-3">
+      <div className="max-w-7xl mx-auto my-10 mt-5 px-3 min-h-100vh">
         <h1 className="font-bold text-lg">
           Search Results ({allJobs.length}){" "}
         </h1>
@@ -28,6 +29,7 @@ const Browse = () => {
           })}
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

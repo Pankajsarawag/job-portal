@@ -18,6 +18,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import Footer from "../footer/Footer";
 
 const CreateJob = () => {
   const [input, setInput] = useState({
@@ -202,6 +203,8 @@ const CreateJob = () => {
           )}
         </form>
       </div>
+
+      <Footer />
     </div>
   );
 };

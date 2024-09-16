@@ -9,6 +9,7 @@ import { useState } from "react";
 import UpdateProfile from "./UpdateProfile";
 import { useSelector } from "react-redux";
 import GetAllAppliedJob from "@/hooks/getAllAppliedJob";
+import Footer from "../footer/Footer";
 
 const Profile = () => {
   GetAllAppliedJob();
@@ -91,6 +92,7 @@ const Profile = () => {
         <AppliedJobTable />
       </div>
       <UpdateProfile open={open} setOpen={setOpen} />
+      <Footer />
     </>
   );
 };
