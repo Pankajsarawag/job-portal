@@ -5,7 +5,7 @@ import Signup from "./components/auth/Signup";
 import Home from "./components/home/Home";
 import Jobs from "./components/jobPages/Jobs";
 import Browse from "./components/Browse";
-import Profile from "./components/userProfile/profile";
+import Profile from "./components/userProfile/Profile";
 import JobDetail from "./components/jobPages/JobDetail";
 import Companies from "./components/admin/Companies";
 import CreateCompany from "./components/admin/CreateCompany";
