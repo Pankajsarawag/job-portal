@@ -28,6 +28,18 @@ app.get("/", (req, res) => {
   res.send("Welcome to JobForge backend!");
 });
 
+app.get("/test-db", async (req, res) => {
+  try {
+    const isConnected = await mongoose.connection.readyState;
+    if (isConnected) {
+      return res.json({ message: "Database connected successfully" });
+    } else {
+      return res.json({ message: "Database not connected" });
+    }
+  } catch (error) {
+    return res.json({ message: "Error connecting to database", error });
+  }
+});
 app.use("/api/v1/user", userRoute);
 app.use("/api/vi/company", companyRoute);
 app.use("/api/v1/job", jobRoute);
