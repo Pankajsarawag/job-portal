@@ -37,7 +37,10 @@ app.get("/test-db", async (req, res) => {
       return res.json({ message: "Database not connected" });
     }
   } catch (error) {
-    return res.json({ message: "Error connecting to database", error });
+    return res.json({
+      message: "Error connecting to database",
+      error: error.message,
+    });
   }
 });
 app.use("/api/v1/user", userRoute);
