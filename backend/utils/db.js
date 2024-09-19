@@ -5,7 +5,7 @@ const connectDB = async () => {
     await mongoose.connect(process.env.DATABASE, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      serverSelectionTimeoutMS: 10000, // Try connecting for 5 seconds
+      serverSelectionTimeoutMS: 20000,
       socketTimeoutMS: 45000,
     });
     console.log("mongoDB connected successfully");
